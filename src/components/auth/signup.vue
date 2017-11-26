@@ -1,74 +1,42 @@
-<template>
-  <div id="signup">
-    <div class="signup-form">
-      <form @submit.prevent="onSubmit">
-        <div class="input">
-          <label for="email">Mail</label>
-          <input
-                  type="email"
-                  id="email"
-                  v-model="email">
-        </div>
-        <div class="input">
-          <label for="age">Your Age</label>
-          <input
-                  type="number"
-                  id="age"
-                  v-model.number="age">
-        </div>
-        <div class="input">
-          <label for="password">Password</label>
-          <input
-                  type="password"
-                  id="password"
-                  v-model="password">
-        </div>
-        <div class="input">
-          <label for="confirm-password">Confirm Password</label>
-          <input
-                  type="password"
-                  id="confirm-password"
-                  v-model="confirmPassword">
-        </div>
-        <div class="input">
-          <label for="country">Country</label>
-          <select id="country" v-model="country">
-            <option value="usa">USA</option>
-            <option value="india">India</option>
-            <option value="uk">UK</option>
-            <option value="germany">Germany</option>
-          </select>
-        </div>
-        <div class="hobbies">
-          <h3>Add some Hobbies</h3>
-          <button @click="onAddHobby" type="button">Add Hobby</button>
-          <div class="hobby-list">
-            <div
-                    class="input"
-                    v-for="(hobbyInput, index) in hobbyInputs"
-                    :key="hobbyInput.id">
-              <label :for="hobbyInput.id">Hobby #{{ index }}</label>
-              <input
-                      type="text"
-                      :id="hobbyInput.id"
-                      v-model="hobbyInput.value">
-              <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
-            </div>
-          </div>
-        </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms">
-          <label for="terms">Accept Terms of Use</label>
-        </div>
-        <div class="submit">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
+<template lang="pug">
+  div#signup
+    div.signup-form
+      form(@submit.prevent="onSubmit")
+        div.input
+          label(for="email") Mail
+          input#email(type="email" v-model="email")
+        div.input
+          label(for="age") Your Age
+          input#age(type="number" v-model.number="age")
+        div.input
+          label(for="password") Password
+          input#password(type="password" v-model="password")
+        div.input
+          label(for="confirm-password") Confirm Password
+          input#confirm-password(type="password" v-model="confirmPassword")
+        div.input
+          label(for="country") Country
+          select#country(v-model="country")
+            option (value="usa") USA
+            option (value="india") India
+            option (value="uk") UK
+            option (value="germany") Germany
+        div.hobbies
+          h3 Add some Hobbies
+          button(@click="onAddHobby" type="button") Add Hobby
+          div.hobby-list
+            div.input(v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id")
+              label(:for="hobbyInput.id") Hobby #{{ index }}
+              input(type="text" :id="hobbyInput.id" v-model="hobbyInput.value")
+              button(@click="onDeleteHobby(hobbyInput.id)" type="button") X
+        div.input.inline
+          input#terms(type="checkbox" v-model="terms")
+          label(for="terms") Accept Terms of Use
+        div.submit
+          button(type="submit") Submit
 </template>
 
-<script>
+script
   import axios from '../../axios-auth';
   export default {
     data () {
@@ -91,7 +59,7 @@
         this.hobbyInputs.push(newHobby)
       },
       onDeleteHobby (id) {
-        this.hobbyInputs = this.hobbyInputs.filter(hobby => hobby.id !== id)
+        this.hobbyInputs = this.hobbyInputs.filter(hobby = hobby.id !== id)
       },
       onSubmit () {
         const formData = {
@@ -100,17 +68,17 @@
           password: this.password,
           confirmPassword: this.confirmPassword,
           country: this.country,
-          hobbies: this.hobbyInputs.map(hobby => hobby.value),
+          hobbies: this.hobbyInputs.map(hobby = hobby.value),
           terms: this.terms
         }
         console.log(formData);
-        axios.post('/users.json', formData).then(res => console.log(res)).catch(error => console.log(error));  // .json is required for Firebase
+        axios.post('/users.json', formData).then(res = console.log(res)).catch(error = console.log(error));  // .json is required for Firebase
       }
     }
   }
-</script>
+/script
 
-<style scoped>
+style scoped
   .signup-form {
     width: 400px;
     margin: 30px auto;
@@ -196,4 +164,4 @@
     color: #ccc;
     cursor: not-allowed;
   }
-</style>
+/style

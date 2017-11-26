@@ -1,27 +1,15 @@
-<template>
-  <div id="signin">
-    <div class="signin-form">
-      <form @submit.prevent="onSubmit">
-        <div class="input">
-          <label for="email">Mail</label>
-          <input
-                  type="email"
-                  id="email"
-                  v-model="email">
-        </div>
-        <div class="input">
-          <label for="password">Password</label>
-          <input
-                  type="password"
-                  id="password"
-                  v-model="password">
-        </div>
-        <div class="submit">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
+<template lang="pug">
+  div#signin
+    div.signin-form
+      form(@submit.prevent="onSubmit")
+        div.input
+          label(for="email") Mail
+          input#email(type="email" v-model="email")
+        div.input
+          label(for="password") Password
+          input#password(type="password" v-model="password")
+        div.submit
+          button(type="submit") Submit
 </template>
 
 <script>

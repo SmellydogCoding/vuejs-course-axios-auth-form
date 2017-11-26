@@ -1,22 +1,15 @@
-<template>
-  <header id="header">
-    <div class="logo">
-      <router-link to="/">Vue - Complete Guide</router-link>
-    </div>
-    <nav>
-      <ul>
-        <li>
-          <router-link to="/signup">Sign Up</router-link>
-        </li>
-        <li>
-          <router-link to="/signin">Sign In</router-link>
-        </li>
-        <li>
-          <router-link to="/dashboard">Dashboard</router-link>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<template lang="pug">
+  header#header
+    div.logo
+      router-link(to="/") Vue - Complete Guide
+    nav
+      ul
+        li
+          router-link(to="/signup") Sign Up
+        li
+          router-link(to="/signin") Sign In
+        li
+          router-link(to="/dashboard") Dashboard
 </template>
 
 <style scoped>
