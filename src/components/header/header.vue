@@ -4,13 +4,30 @@
       router-link(to="/") Vue - Complete Guide
     nav
       ul
-        li
+        li(v-if="!auth")
           router-link(to="/signup") Sign Up
-        li
+        li(v-if="!auth")
           router-link(to="/signin") Sign In
-        li
+        li(v-if="auth")
           router-link(to="/dashboard") Dashboard
+        li(v-if="auth" @click="logout")
+          button.logout Logout
 </template>
+
+<script>
+  export default {
+    computed: {
+      auth() {
+        return this.$store.getters.isAuthenticated
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
+      }
+    }
+  }
+</script>
 
 <style scoped>
   #header {
@@ -60,5 +77,13 @@
   li a:active,
   li a.router-link-active {
     color: #fa923f;
+  }
+  
+  .logout {
+    background-color: transparent;
+    border: none;
+    font: inherit;
+    color: white;
+    cursor: pointer;
   }
 </style>

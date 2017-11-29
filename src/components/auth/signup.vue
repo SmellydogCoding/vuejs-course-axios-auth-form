@@ -17,16 +17,16 @@
         div.input
           label(for="country") Country
           select#country(v-model="country")
-            option (value="usa") USA
-            option (value="india") India
-            option (value="uk") UK
-            option (value="germany") Germany
+            option(value="usa") USA
+            option(value="india") India
+            option(value="uk") UK
+            option(value="germany") Germany
         div.hobbies
           h3 Add some Hobbies
           button(@click="onAddHobby" type="button") Add Hobby
           div.hobby-list
             div.input(v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id")
-              label(:for="hobbyInput.id") Hobby #{{ index }}
+              label(:for="hobbyInput.id") Hobby # {{ index }}
               input(type="text" :id="hobbyInput.id" v-model="hobbyInput.value")
               button(@click="onDeleteHobby(hobbyInput.id)" type="button") X
         div.input.inline
@@ -36,8 +36,7 @@
           button(type="submit") Submit
 </template>
 
-script
-  import axios from '../../axios-auth';
+<script>
   export default {
     data () {
       return {
@@ -59,7 +58,7 @@ script
         this.hobbyInputs.push(newHobby)
       },
       onDeleteHobby (id) {
-        this.hobbyInputs = this.hobbyInputs.filter(hobby = hobby.id !== id)
+        this.hobbyInputs = this.hobbyInputs.filter(hobby => hobby.id !== id)
       },
       onSubmit () {
         const formData = {
@@ -68,17 +67,17 @@ script
           password: this.password,
           confirmPassword: this.confirmPassword,
           country: this.country,
-          hobbies: this.hobbyInputs.map(hobby = hobby.value),
+          hobbies: this.hobbyInputs.map(hobby => hobby.value),
           terms: this.terms
         }
         console.log(formData);
-        axios.post('/users.json', formData).then(res = console.log(res)).catch(error = console.log(error));  // .json is required for Firebase
+        this.$store.dispatch('signup', formData)
       }
     }
   }
-/script
+</script>
 
-style scoped
+<style scoped>
   .signup-form {
     width: 400px;
     margin: 30px auto;
@@ -164,4 +163,4 @@ style scoped
     color: #ccc;
     cursor: not-allowed;
   }
-/style
+</style>
