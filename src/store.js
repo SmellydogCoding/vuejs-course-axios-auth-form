@@ -62,14 +62,12 @@ export default new Vuex.Store({
     getUser ({commit, state}) {
       if (!state.idToken) { return console.log('not logged in') }
       axiosMain.get('/users.json' + '?auth=' + state.idToken).then(res => {
-        console.log(res)
         const data = res.data;
         const users = [];
         for (let key in data) {
           data[key].id = key;
           users.push(data[key]);
         }
-        console.log(users);
         commit('storeUser', users[0])
       }).catch(error => console.log(error));
     },
